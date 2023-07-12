@@ -1,27 +1,34 @@
 const nodemailer = require("nodemailer/lib/nodemailer");
 
-var smtpTransport = nodemailer.createTransport({
-  host: " smtp.mailgun.org",
-  port: 587,
+var mailgunsmtpTransport = nodemailer.createTransport({
+  host: process.env.SERVER_MAILGUN,
+  port: process.env.PORT_MAILGUN,
   auth: {
     user: process.env.USERNAME_MAILGUN,
     pass: process.env.PASSWORD_MAILGUN,
   },
 });
 
+var elastichsmtpTransport = nodemailer.createTransport({
+  host: process.env.SERVER_ELASTICEMAIL,
+  port: process.env.PORT_ELASTICEMAIL,
+  auth: {
+    user: process.env.USERNAME_ELASTICEMAIL,
+    pass: process.env.PASSWORD_ELASTICEMAIL,
+  },
+});
+
 export default function handle(req, res) {
-  var mainOptions = {
-    // thiết lập đối tượng, nội dung gửi mail
-    from: "Thanh Batmon",
-    to: "npham140201@gmail.com",
-    subject: "Test Nodemailer",
-    text: "You recieved message from ",
-    html: "<p>You have got a new message</b><ul><li>Username:" + "</li></ul>",
+  var mailOpts = {
+    from: "dophamnguyen@dophamnguyen.xyz",
+    to: "	npham140201@dophamnguyen.xyz",
+    subject: "test subject",
+    text: "test message form mailgun",
+    html: "<b >test message form mailgun</b>",
   };
 
-  smtpTransport
-    .sendMail(mainOptions)
+  elastichsmtpTransport
+    .sendMail(mailOpts)
     .catch((err) => console.log(err))
-    .then((value) => console.log(value));
-  res.status(200).json({ text: process.env.USERNAME_MAILGUN });
+    .then((value) => res.status(200).json({ status: "ok" }));
 }
