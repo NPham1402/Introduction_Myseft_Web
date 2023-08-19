@@ -37,7 +37,7 @@ export default function Home() {
               loading === true ? " animate-pulse" : ""
             }  m-auto`}
           >
-            <div className="w-full h-full text-center pt-[72px] relative max-h-[80vh] min-h-[80vh] max-w-[380px] ">
+            <div className="w-full h-full text-center pt-[72px] relative  min-h-[80vh] max-w-[380px] ">
               <Rotate collapse>
                 <div className="w-[180px] relative   mx-auto mb-[30px] ">
                   <div className="photoBacb"></div>
