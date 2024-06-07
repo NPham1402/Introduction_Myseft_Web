@@ -1,0 +1,32 @@
+{
+  "common": {
+    "name": "Do Pham Nguyen",
+    "profile": "Do Pham Nguyen's profile",
+    "title": {
+      "webDeveloper": "Web Developer",
+      "downloadCV": "Download CV",
+      "home": "Home",
+      "aboutMe": "About me",
+      "resume": "Resume",
+      "portfolio": "Portfolio",
+      "message": "Message",
+      "vietnam": "Vietnamese",
+      "usa": "English",
+      "contact": "contact",
+      "sendMe": "Send mesage to me",
+      "fullname": "FullName",
+      "subject": "Subject",
+      "sendmess": "Send message"
+    },
+    "button": {
+      "search": "Search",
+      "sendmess": "Send message"
+    },
+    "errCode": {
+      "tooLong": "Too Long!",
+      "tooShort": "Too Short!",
+      "required": "Required",
+      "invalidEmail": "Invalid Email"
+    }
+  }
+}

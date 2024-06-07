@@ -1,0 +1,32 @@
+{
+  "common": {
+    "name": "Đỗ Phạm Nguyên",
+    "profile": "Trang Web giới thiệu về Đỗ Phạm Nguyên",
+    "title": {
+      "webDeveloper": "Lập trình Web",
+      "downloadCV": "Tải CV",
+      "home": "Trang Chủ",
+      "aboutMe": "Giới thiệu về tôi",
+      "resume": "Tóm Tắt",
+      "portfolio": "Danh Mục",
+      "message": "Tin Nhắn",
+      "vietnam": "Tiếng Việt",
+      "usa": "Tiếng Anh",
+      "contact": "Liên lạc",
+      "sendMe": "Gửi tôi lời nhắn của bạn",
+      "fullname": "Họ Tên",
+      "subject": "Chủ đề"
+    },
+    "button": {
+      "search": "Tìm kiếm",
+      "sendmess": "Gửi lời nhắn"
+    },
+    "errCode": {
+      "tooLong": "Quá dài",
+      "tooShort": "Quá ngắn",
+      "required": "Không để trống",
+      "invalidEmail": "Email không hợp lệ"
+    }
+  }
+}
+ 

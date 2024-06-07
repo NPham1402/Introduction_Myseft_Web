@@ -1,8 +1,10 @@
 "use client";
 import { IoHomeOutline } from "react-icons/io5";
 import Image from "next/image";
-import avartar from "../../source/avartar.jpg";
-import { BiLogoFacebook, BiLogoGithub, BiMessageDetail } from "react-icons/bi";
+import vietnameFLag from "../../source/vietname_flag.png";
+import usaFLag from "../../source/usa_Flag.png";
+import logo from "../../source/logo.PNG";
+import { BiLogoGithub, BiMessageDetail } from "react-icons/bi";
 import { IoPersonOutline, IoBagHandleOutline } from "react-icons/io5";
 import { PiGraduationCapFill } from "react-icons/pi";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
@@ -19,10 +21,13 @@ import PortfolioPage from "../../component/page/portfolio/PortfolioPage";
 import MessPage from "../../component/page/message/MessPage";
 import Loading from "./Loading";
 import { delay } from "../../component/function/delay";
+import { useTranslation } from "react-i18next";
+import Notification from "../../component/iteam/Notification";
 
 export default function Home() {
   const [positionMenu, setPositionMenu] = useState(0);
-
+  const [langeuageMenu, setLanguageMenu] = useState(1);
+  const { t, i18n } = useTranslation();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     delay(800);
@@ -45,17 +50,17 @@ export default function Home() {
                     width={180}
                     height={180}
                     alt={"avartar"}
-                    src={avartar}
+                    src={logo}
                     className="rounded-full border-[3px] mt-3 border-[#fff] bg-[#fff]"
                   />
                 </div>
               </Rotate>
               <LightSpeed delay={2000} bottom collapse>
                 <h1 className="text-[36px] font-semibold text-[#f5f5f5]">
-                  Đỗ Phạm Nguyên
+                  {t("common.name")}
                 </h1>
                 <p className="text-[18px] font-light text-[#bbb]  mb-[32px]">
-                  Web Devoloper
+                  {t("common.title.webDeveloper")}
                 </p>
                 <div className="flex justify-center  flex-row">
                   <BiLogoGithub
@@ -63,15 +68,12 @@ export default function Home() {
                     color="white"
                     size={30}
                   />
-                  <BiLogoFacebook
-                    className="cursor-pointer hover:bg-white/20 hover:rounded-full"
-                    color="white"
-                    size={30}
-                  />
                 </div>
-                <div className="w-[146px] h-[46px] cursor-pointer mx-auto mt-[72px] rounded-[30px] text-white border-[2px] border-[#f5f5f5]">
-                  <p className="mt-[8px]">DownLoad CV</p>
-                </div>
+                <a href="/src/app/cv/cv.pdf" download>
+                  <div className="w-[146px] h-[46px] cursor-pointer mx-auto mt-[72px] rounded-[30px] text-white border-[2px] border-[#f5f5f5]">
+                    <p className="mt-[8px]">{t("common.title.downloadCV")}</p>
+                  </div>
+                </a>
               </LightSpeed>
               <div className="text-[#bbb] text-[12px]  text-center absolute bottom-[8px] w-full">
                 © 2020 Do Pham Nguyen.
@@ -151,6 +153,52 @@ export default function Home() {
               } rounded-[35px] z-[100] pt-[15px]  `}
             >
               <Zoom collapse>
+                <li className="pt-[15px] " id="vietnam">
+                  <div className={` cursor-pointer `}>
+                    <Image
+                      width={30}
+                      height={30}
+                      alt={"Viet Nam Flag"}
+                      onClick={() => {
+                        setLanguageMenu(0);
+                        i18n.changeLanguage("vi");
+                      }}
+                      src={vietnameFLag}
+                      className={`rounded-full opacity-35  mx-auto ${
+                        langeuageMenu === 0 && "border-[0.5px] border-white"
+                      }`}
+                    />
+                  </div>
+                </li>
+              </Zoom>
+              <Zoom collapse>
+                <li className="pt-[15px] " id="usa">
+                  <div
+                    className={` cursor-pointer text-[#b5b6b7] hover:text-[#04b4e0]`}
+                  >
+                    <Image
+                      width={30}
+                      height={30}
+                      alt={"USA Flag"}
+                      src={usaFLag}
+                      onClick={() => {
+                        setLanguageMenu(1);
+                        i18n.changeLanguage("en");
+                      }}
+                      className={`rounded-full p-0  mx-auto ${
+                        langeuageMenu === 1 && "border-[0.5px] border-white"
+                      }`}
+                    />
+                  </div>
+                </li>
+              </Zoom>
+            </ul>
+            <ul
+              className={` w-[70px] h-[130px] bg-[#444444] ${
+                loading === true ? " animate-pulse " : ""
+              } rounded-[35px] z-[100] pt-[15px]  `}
+            >
+              <Zoom collapse>
                 <li className="pt-[15px] ">
                   <MdArrowForwardIos
                     className={`mx-auto cursor-pointer text-[#b5b6b7] hover:text-[#04b4e0] hover:bg-gray hover:rounded-full`}
@@ -182,31 +230,43 @@ export default function Home() {
         anchorId="resumepage"
         place="right"
         variant="info"
-        content="RESUME"
+        content={t("common.title.resume").toUpperCase()}
       />
       <ReactTooltip
         anchorId="portfolio"
         place="right"
         variant="info"
-        content="PORFOLIO"
+        content={t("common.title.portfolio").toUpperCase()}
+      />
+      <ReactTooltip
+        anchorId="vietnam"
+        place="right"
+        variant="info"
+        content={t("common.title.vietnam").toUpperCase()}
+      />
+      <ReactTooltip
+        anchorId="usa"
+        place="right"
+        variant="info"
+        content={t("common.title.usa").toUpperCase()}
       />
       <ReactTooltip
         anchorId="homepage"
         place="right"
         variant="info"
-        content="HOME"
+        content={t("common.title.home").toUpperCase()}
       />
       <ReactTooltip
         anchorId="messagepage"
         place="right"
         variant="info"
-        content="MESSAGE"
+        content={t("common.title.message").toUpperCase()}
       />
       <ReactTooltip
         anchorId="aboutmepage"
         place="right"
         variant="info"
-        content="ABOUT ME"
+        content={t("common.title.aboutMe").toUpperCase()}
       />
     </main>
   );

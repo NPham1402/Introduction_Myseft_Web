@@ -17,12 +17,13 @@ function AboutMe(props) {
         <span className="text-[32px] text-[#04b4e0] font-semibold"> ME</span>
         <div className="flex flex-row mt-[20px]">
           <div className="w-7/12 mr-[10px] text-[15px] leading-[1.65rem] font-normal">
-            Proin volutpat mauris pellentesque pharetra. Suspendisse congue elit
-            vel odio suscipit, sit amet tempor nisl imperdiet. Quisque ex justo,
-            faucibus ut mi in, condimentum finibus dolor. Aliquam vitae
-            hendrerit dolor, eget imperdiet mauris. Maecenas et ante id ipsum
-            condimentum dictum et vel massa. Ut in imperdiet dolor, vel
-            consectetur dui.
+            I‘m a sociable, outgoing and cherish fullstack web application
+            developer who is willing to fully dedicate to work and supervise the
+            development state of any project I take part in as a role of team
+            member as well as team leader. My ultimate goal is to continuously
+            enhance my technology skillsets and knowledge especially in
+            framework, library that support for NodeJs through theories &
+            working experience.
           </div>
           <div className="w-5/12">
             <InforLine
@@ -37,9 +38,12 @@ function AboutMe(props) {
           </div>
         </div>
         <div className="mt-[50px]">
-          <span className="text-[21px] font-semibold">WHAT I </span>
-          <span className="text-[21px] text-[#04b4e0] font-semibold">DO</span>
+          <span className="text-[21px] font-semibold">MY </span>
+          <span className="text-[21px] text-[#04b4e0] font-semibold">
+            SOCIAL NETWORK
+          </span>
         </div>
+        <div className="w-7/12 mr-[10px] text-[15px] leading-[1.65rem] font-normal"></div>
       </div>
     </Slide>
   );
