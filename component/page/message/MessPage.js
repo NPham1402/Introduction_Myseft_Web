@@ -35,7 +35,7 @@ function MessPage(props) {
   });
   return (
     <Flash>
-      <div className="w-ful l overflow-auto  h-full mt-auto align-middle min-h-[80vh] max-h-[80vh]   bg-[#222] rounded-r-[30px] p-[60px] text-white">
+      <div className="w-full overflow-auto  h-full mt-auto align-middle min-h-[80vh] max-h-[80vh]   bg-[#222] rounded-r-[30px] p-[60px] text-white">
         <div className="page-title">
           <p className="text-[32px]  font-bold">{t("common.title.contact")}</p>
         </div>
@@ -201,7 +201,7 @@ function MessPage(props) {
                   </div>
                   <ReCAPTCHA
                     className="bg-inherit mb-[21.5px]"
-                    sitekey="6LemTvQmAAAAABgo0scLTH0MORLW8IIUjfNVZiUC"
+                    sitekey="6LcUV7grAAAAAOarOnVMOpNwn2jsejKe_l-l9HDd"
                     onChange={(e) => {
                       setToken(e);
                     }}
