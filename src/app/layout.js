@@ -60,6 +60,12 @@ export default function RootLayout({ children }) {
     if (saved === "light") { setIsDark(false); document.documentElement.classList.add("light"); }
   }, []);
 
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js").catch(() => {});
+    }
+  }, []);
+
   const toggleTheme = () => {
     const next = !isDark;
     setIsDark(next);
@@ -98,6 +104,19 @@ export default function RootLayout({ children }) {
         <meta name="twitter:image" content="https://dophamnguyen.xyz/og-image.png" />
 
         <link rel="canonical" href="https://dophamnguyen.xyz/" />
+
+        {/* PWA */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#04b4e0" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="DPN Portfolio" />
+        <link rel="apple-touch-icon" href="/icon-192.png" />
+
+        {/* Preconnect */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body
         style={{
@@ -138,49 +157,49 @@ export default function RootLayout({ children }) {
               </div>
 
               {/* Desktop side nav */}
-              <div className="flex flex-col justify-between">
-                <ul className={`w-[70px] h-[265px] bg-[#444444] ${loading ? "animate-pulse " : ""} rounded-[35px] z-[100] py-[30px]`}>
+              <nav aria-label="Main navigation" className="flex flex-col justify-between">
+                <ul role="list" className={`w-[70px] h-[265px] bg-[#444444] ${loading ? "animate-pulse " : ""} rounded-[35px] z-[100] py-[30px]`}>
                   <li className="anim-zoom-1 active" id="homepage">
-                    <IoHomeOutline size={30} onClick={() => navigate(0)} className={`mx-auto cursor-pointer hover:text-[#04b4e0] ${positionMenu === 0 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
+                    <IoHomeOutline size={30} onClick={() => navigate(0)} aria-label="Home" role="button" className={`mx-auto cursor-pointer hover:text-[#04b4e0] ${positionMenu === 0 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
                   </li>
                   <li className="anim-zoom-2 pt-[15px]" id="aboutmepage">
-                    <IoPersonOutline size={30} onClick={() => navigate(1)} className={`mx-auto cursor-pointer hover:text-[#04b4e0] ${positionMenu === 1 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
+                    <IoPersonOutline size={30} onClick={() => navigate(1)} aria-label="About me" role="button" className={`mx-auto cursor-pointer hover:text-[#04b4e0] ${positionMenu === 1 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
                   </li>
                   <li className="anim-zoom-3 pt-[15px]" id="resumepage">
-                    <PiGraduationCapFill size={30} onClick={() => navigate(2)} className={`mx-auto cursor-pointer hover:text-[#04b4e0] ${positionMenu === 2 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
+                    <PiGraduationCapFill size={30} onClick={() => navigate(2)} aria-label="Resume" role="button" className={`mx-auto cursor-pointer hover:text-[#04b4e0] ${positionMenu === 2 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
                   </li>
                   <li className="anim-zoom-4 pt-[15px]" id="portfolio">
-                    <IoBagHandleOutline size={30} onClick={() => navigate(3)} className={`mx-auto cursor-pointer hover:text-[#04b4e0] ${positionMenu === 3 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
+                    <IoBagHandleOutline size={30} onClick={() => navigate(3)} aria-label="Portfolio" role="button" className={`mx-auto cursor-pointer hover:text-[#04b4e0] ${positionMenu === 3 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
                   </li>
                   <li className="anim-zoom-5 pt-[15px]" id="messagepage">
-                    <BiMessageDetail size={30} onClick={() => navigate(4)} className={`mx-auto cursor-pointer hover:text-[#04b4e0] ${positionMenu === 4 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
+                    <BiMessageDetail size={30} onClick={() => navigate(4)} aria-label="Contact" role="button" className={`mx-auto cursor-pointer hover:text-[#04b4e0] ${positionMenu === 4 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
                   </li>
                 </ul>
-                <ul className={`w-[70px] h-[180px] bg-[#444444] ${loading ? "animate-pulse " : ""} rounded-[35px] z-[100] pt-[15px]`}>
+                <ul role="list" className={`w-[70px] h-[180px] bg-[#444444] ${loading ? "animate-pulse " : ""} rounded-[35px] z-[100] pt-[15px]`}>
                   <li className="anim-zoom-1 pt-[15px]" id="vietnam">
-                    <Image width={30} height={30} alt="Viet Nam Flag" onClick={() => { setLanguageMenu(0); i18n.changeLanguage("vi"); }} src={vietnameFLag}
+                    <Image width={30} height={30} alt="Switch to Vietnamese" onClick={() => { setLanguageMenu(0); i18n.changeLanguage("vi"); }} src={vietnameFLag}
                       className={`rounded-full opacity-35 mx-auto cursor-pointer ${langeuageMenu === 0 && "border-[0.5px] border-white"}`} />
                   </li>
                   <li className="anim-zoom-2 pt-[15px]" id="usa">
-                    <Image width={30} height={30} alt="USA Flag" src={usaFLag} onClick={() => { setLanguageMenu(1); i18n.changeLanguage("en"); }}
+                    <Image width={30} height={30} alt="Switch to English" src={usaFLag} onClick={() => { setLanguageMenu(1); i18n.changeLanguage("en"); }}
                       className={`rounded-full p-0 mx-auto cursor-pointer ${langeuageMenu === 1 && "border-[0.5px] border-white"}`} />
                   </li>
                   <li className="anim-zoom-3 pt-[15px]" id="theme-toggle">
                     {isDark
-                      ? <BsSun size={26} onClick={toggleTheme} className="mx-auto cursor-pointer text-[#b5b6b7] hover:text-[#04b4e0]" />
-                      : <BsMoon size={26} onClick={toggleTheme} className="mx-auto cursor-pointer text-[#b5b6b7] hover:text-[#04b4e0]" />}
+                      ? <BsSun size={26} onClick={toggleTheme} aria-label="Switch to light mode" role="button" className="mx-auto cursor-pointer text-[#b5b6b7] hover:text-[#04b4e0]" />
+                      : <BsMoon size={26} onClick={toggleTheme} aria-label="Switch to dark mode" role="button" className="mx-auto cursor-pointer text-[#b5b6b7] hover:text-[#04b4e0]" />}
                   </li>
                 </ul>
 
-                <ul className={`w-[70px] h-[130px] bg-[#444444] ${loading ? "animate-pulse " : ""} rounded-[35px] z-[100] pt-[15px]`}>
+                <ul role="list" className={`w-[70px] h-[130px] bg-[#444444] ${loading ? "animate-pulse " : ""} rounded-[35px] z-[100] pt-[15px]`}>
                   <li className="anim-zoom-1 pt-[15px]">
-                    <MdArrowForwardIos className="mx-auto cursor-pointer text-[#b5b6b7] hover:text-[#04b4e0]" onClick={() => navigate(positionMenu + 1)} size={30} />
+                    <MdArrowForwardIos aria-label="Next page" role="button" className="mx-auto cursor-pointer text-[#b5b6b7] hover:text-[#04b4e0]" onClick={() => navigate(positionMenu + 1)} size={30} />
                   </li>
                   <li className="anim-zoom-2 pt-[15px]">
-                    <MdArrowBackIosNew className="mx-auto cursor-pointer text-[#b5b6b7] hover:text-[#04b4e0]" onClick={() => navigate(positionMenu - 1)} size={30} />
+                    <MdArrowBackIosNew aria-label="Previous page" role="button" className="mx-auto cursor-pointer text-[#b5b6b7] hover:text-[#04b4e0]" onClick={() => navigate(positionMenu - 1)} size={30} />
                   </li>
                 </ul>
-              </div>
+              </nav>
             </div>
 
             {/* ── MOBILE layout ── */}
@@ -213,15 +232,15 @@ export default function RootLayout({ children }) {
               </div>
 
               {/* Bottom navigation */}
-              <div className={`fixed bottom-0 left-0 right-0 bg-[#444444] flex flex-row justify-around items-center py-3 px-4 z-[100] ${loading ? "animate-pulse" : ""}`}>
-                <IoHomeOutline size={26} onClick={() => navigate(0)} className={`cursor-pointer ${positionMenu === 0 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
-                <IoPersonOutline size={26} onClick={() => navigate(1)} className={`cursor-pointer ${positionMenu === 1 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
-                <PiGraduationCapFill size={26} onClick={() => navigate(2)} className={`cursor-pointer ${positionMenu === 2 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
-                <IoBagHandleOutline size={26} onClick={() => navigate(3)} className={`cursor-pointer ${positionMenu === 3 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
-                <BiMessageDetail size={26} onClick={() => navigate(4)} className={`cursor-pointer ${positionMenu === 4 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
-                <MdArrowBackIosNew size={22} onClick={() => navigate(positionMenu - 1)} className="cursor-pointer text-[#b5b6b7]" />
-                <MdArrowForwardIos size={22} onClick={() => navigate(positionMenu + 1)} className="cursor-pointer text-[#b5b6b7]" />
-              </div>
+              <nav aria-label="Mobile navigation" className={`fixed bottom-0 left-0 right-0 bg-[#444444] flex flex-row justify-around items-center py-3 px-4 z-[100] ${loading ? "animate-pulse" : ""}`}>
+                <IoHomeOutline size={26} onClick={() => navigate(0)} aria-label="Home" role="button" className={`cursor-pointer ${positionMenu === 0 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
+                <IoPersonOutline size={26} onClick={() => navigate(1)} aria-label="About me" role="button" className={`cursor-pointer ${positionMenu === 1 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
+                <PiGraduationCapFill size={26} onClick={() => navigate(2)} aria-label="Resume" role="button" className={`cursor-pointer ${positionMenu === 2 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
+                <IoBagHandleOutline size={26} onClick={() => navigate(3)} aria-label="Portfolio" role="button" className={`cursor-pointer ${positionMenu === 3 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
+                <BiMessageDetail size={26} onClick={() => navigate(4)} aria-label="Contact" role="button" className={`cursor-pointer ${positionMenu === 4 ? "text-[#04b4e0]" : "text-[#b5b6b7]"}`} />
+                <MdArrowBackIosNew size={22} onClick={() => navigate(positionMenu - 1)} aria-label="Previous page" role="button" className="cursor-pointer text-[#b5b6b7]" />
+                <MdArrowForwardIos size={22} onClick={() => navigate(positionMenu + 1)} aria-label="Next page" role="button" className="cursor-pointer text-[#b5b6b7]" />
+              </nav>
             </div>
 
           </Suspense>
