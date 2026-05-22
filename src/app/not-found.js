@@ -1,10 +1,6 @@
 export const runtime = "edge";
-"use client";
-import { useRouter } from "next/navigation";
 
 export default function NotFound() {
-  const router = useRouter();
-
   return (
     <div
       style={{
@@ -20,7 +16,6 @@ export default function NotFound() {
         padding: "24px",
       }}
     >
-      {/* Glowing 404 */}
       <div
         style={{
           fontSize: "clamp(80px, 20vw, 160px)",
@@ -37,26 +32,17 @@ export default function NotFound() {
         404
       </div>
 
-      {/* Accent line */}
-      <div
-        style={{
-          width: "60px",
-          height: "3px",
-          background: "#04b4e0",
-          borderRadius: "2px",
-          marginBottom: "24px",
-        }}
-      />
+      <div style={{ width: "60px", height: "3px", background: "#04b4e0", borderRadius: "2px", marginBottom: "24px" }} />
 
-      <h1 style={{ fontSize: "24px", fontWeight: 600, marginBottom: "12px", color: "#f5f5f5" }}>
+      <h1 style={{ fontSize: "24px", fontWeight: 600, marginBottom: "12px" }}>
         Page not found
       </h1>
       <p style={{ fontSize: "16px", color: "#888", marginBottom: "40px", maxWidth: "360px", lineHeight: 1.6 }}>
         The page you&apos;re looking for doesn&apos;t exist or has been moved.
       </p>
 
-      <button
-        onClick={() => router.push("/")}
+      <a
+        href="/"
         style={{
           padding: "12px 36px",
           borderRadius: "30px",
@@ -66,13 +52,12 @@ export default function NotFound() {
           fontSize: "15px",
           fontWeight: 500,
           cursor: "pointer",
-          transition: "all 0.2s",
+          textDecoration: "none",
+          display: "inline-block",
         }}
-        onMouseEnter={(e) => { e.target.style.background = "rgba(4,180,224,0.15)"; }}
-        onMouseLeave={(e) => { e.target.style.background = "transparent"; }}
       >
         ← Back to Home
-      </button>
+      </a>
 
       <p style={{ marginTop: "60px", fontSize: "13px", color: "rgba(255,255,255,0.2)" }}>
         © 2020 Do Pham Nguyen · dophamnguyen.xyz
