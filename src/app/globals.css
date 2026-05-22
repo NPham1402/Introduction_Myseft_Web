@@ -27,7 +27,6 @@ html.light {
 }
 
 body{
-    background-image: url("../../source/main_bg.png");
     background-color: var(--c-body);
     transition: background-color 0.3s ease;
 }

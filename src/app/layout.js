@@ -22,6 +22,9 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import Loading from "./Loading";
 import { delay } from "../../component/function/delay";
 import { useRouter, usePathname } from "next/navigation";
+import dynamic from "next/dynamic";
+
+const Background3D = dynamic(() => import("../../component/background/Background3D"), { ssr: false });
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,7 +38,6 @@ const PATH_TO_INDEX = {
 };
 
 export default function RootLayout({ children }) {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [langeuageMenu, setLanguageMenu] = useState(1);
   const [loading, setLoading] = useState(true);
   const [isDark, setIsDark] = useState(true);
@@ -45,11 +47,6 @@ export default function RootLayout({ children }) {
 
   const positionMenu = PATH_TO_INDEX[pathname] ?? 0;
 
-  useEffect(() => {
-    const handleMouseMove = (e) => setMousePos({ x: e.clientX, y: e.clientY });
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
 
   useEffect(() => {
     delay(800).then(() => setLoading(false));
@@ -118,14 +115,9 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body
-        style={{
-          backgroundPosition:
-            "calc(0% + -" + mousePos.x / 70 + "px) calc(0% + -" + mousePos.y / 70 + "px)",
-        }}
-        className={inter.className}
-      >
-        <main className="flex min-h-screen overflow-hidden">
+      <body className={inter.className}>
+        <Background3D />
+        <main className="flex min-h-screen overflow-hidden" style={{ position: "relative", zIndex: 1 }}>
           <Suspense fallback={<Loading />}>
 
             {/* ── DESKTOP layout ── */}

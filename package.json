@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@marsidev/react-turnstile": "^1.5.2",
+    "@react-three/fiber": "^9.6.1",
     "autoprefixer": "10.4.14",
     "dayjs": "^1.11.9",
     "eslint": "8.43.0",
@@ -33,6 +34,7 @@
     "react-text-transition": "^3.1.0",
     "react-tooltip": "^5.16.1",
     "tailwindcss": "3.3.2",
+    "three": "^0.184.0",
     "yup": "^1.2.0"
   },
   "devDependencies": {
