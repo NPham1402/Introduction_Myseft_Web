@@ -5,7 +5,7 @@ import { VscLocation } from "react-icons/vsc";
 import { BsTelephone } from "react-icons/bs";
 import { AiOutlineMail } from "react-icons/ai";
 import { FiGithub } from "react-icons/fi";
-import ReCAPTCHA from "react-google-recaptcha";
+import { Turnstile } from "@marsidev/react-turnstile";
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
 import { Tooltip as ReactTooltip } from "react-tooltip";
@@ -161,10 +161,11 @@ function MessPage() {
                     <ReactTooltip isOpen={!!errors.message} anchorId="msg-message" place="top" variant="error" content={errors.message} />
                   </div>
 
-                  <ReCAPTCHA
-                    sitekey="6LcUV7grAAAAAOarOnVMOpNwn2jsejKe_l-l9HDd"
-                    onChange={setToken}
-                    theme="dark"
+                  <Turnstile
+                    siteKey="0x4AAAAAADUZ3LY80BzlNpEY"
+                    onSuccess={setToken}
+                    onExpire={() => setToken(null)}
+                    options={{ theme: "dark" }}
                   />
 
                   <button
