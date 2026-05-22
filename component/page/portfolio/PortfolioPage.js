@@ -145,7 +145,7 @@ function ProjectCard({ project, isActive, onClick, subtitle }) {
   return (
     <div
       onClick={onClick}
-      className={`cursor-pointer rounded-[14px] p-[16px] mb-[12px] border transition-all duration-200 ${
+      className={`cursor-pointer rounded-[14px] p-[14px] border transition-all duration-200 shrink-0 md:shrink w-[160px] md:w-auto ${
         isActive
           ? "border-[#04b4e0] bg-[#04b4e0]/10"
           : "border-[#444] bg-[#2a2a2a] hover:border-[#04b4e0]/50"
@@ -179,15 +179,15 @@ function PortfolioPage() {
   const lang = i18n.language === "vi" ? "vi" : "en";
 
   return (
-    <div className="page-enter w-full h-full mt-auto align-middle min-h-[80vh] max-h-[80vh] overflow-hidden bg-[#222] rounded-r-[30px] p-[60px] text-white flex flex-col">
-      <div className="mb-[20px]">
-        <span className="text-[32px] font-semibold">PORT</span>
-        <span className="text-[32px] text-[#04b4e0] font-semibold">FOLIO</span>
+    <div className="page-enter w-full min-h-full overflow-auto bg-[#222] md:rounded-r-[30px] p-4 md:p-[60px] text-white flex flex-col">
+      <div className="mb-[16px] md:mb-[20px]">
+        <span className="text-[28px] md:text-[32px] font-semibold">PORT</span>
+        <span className="text-[28px] md:text-[32px] text-[#04b4e0] font-semibold">FOLIO</span>
       </div>
 
-      <div className="flex flex-row gap-[24px] flex-1 overflow-hidden">
-        {/* Project list */}
-        <div className="w-5/12 overflow-auto pr-[4px]">
+      <div className="flex flex-col md:flex-row gap-[16px] md:gap-[24px] flex-1">
+        {/* Project list — horizontal scroll on mobile */}
+        <div className="md:w-5/12 flex flex-row md:flex-col gap-[10px] overflow-x-auto md:overflow-y-auto md:overflow-x-hidden pb-1 md:pb-0 shrink-0">
           {PROJECT_KEYS.map((p, i) => (
             <ProjectCard
               key={p.key}
@@ -200,7 +200,7 @@ function PortfolioPage() {
         </div>
 
         {/* Detail panel */}
-        <div className="w-7/12 bg-[#2a2a2a] rounded-[16px] p-[24px] overflow-auto flex flex-col">
+        <div className="md:w-7/12 bg-[#2a2a2a] rounded-[16px] p-[16px] md:p-[24px] overflow-auto flex flex-col">
           <p className="text-[22px] font-bold text-[#f5f5f5] mb-[2px]">{active.title}</p>
           <div className="flex items-center gap-[10px] mb-[14px]">
             <p className="text-[13px] text-[#04b4e0] italic">

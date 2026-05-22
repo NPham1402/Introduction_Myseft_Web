@@ -27,28 +27,28 @@ function AboutMe() {
   ];
 
   return (
-    <div className="page-enter w-full overflow-auto h-full min-h-[80vh] max-h-[80vh] bg-[#222] rounded-r-[30px] text-white flex flex-col">
+    <div className="page-enter w-full overflow-auto h-full min-h-full bg-[#222] md:rounded-r-[30px] text-white flex flex-col">
       {/* Top bio section */}
-      <div className="px-[50px] pt-[44px] pb-[32px] border-b border-white/10">
+      <div className="px-4 md:px-[50px] pt-5 md:pt-[44px] pb-[32px] border-b border-white/10">
         <div className="mb-[20px]">
-          <span className="text-[30px] font-bold">ABOUT</span>
-          <span className="text-[30px] font-bold text-[#04b4e0]"> ME</span>
+          <span className="text-[26px] md:text-[30px] font-bold">ABOUT</span>
+          <span className="text-[26px] md:text-[30px] font-bold text-[#04b4e0]"> ME</span>
         </div>
 
-        <div className="flex flex-row gap-[32px]">
+        <div className="flex flex-col md:flex-row gap-[20px] md:gap-[32px]">
           {/* Bio text */}
-          <p className="w-6/12 text-[13.5px] leading-[1.8] text-[#ccc]">
+          <p className="md:w-6/12 text-[13.5px] leading-[1.8] text-[#ccc]">
             {t("aboutMe.bio")}
           </p>
 
           {/* Info grid */}
-          <div className="w-6/12 grid grid-cols-2 gap-x-[16px] gap-y-[10px] self-start">
+          <div className="md:w-6/12 grid grid-cols-2 gap-x-[16px] gap-y-[10px] self-start">
             {INFO.map(({ label, value }) => (
               <div key={label} className="flex flex-col">
                 <span className="text-[11px] uppercase tracking-widest text-[#04b4e0] font-semibold">
                   {label}
                 </span>
-                <span className="text-[13px] text-white mt-[2px]">{value}</span>
+                <span className="text-[13px] text-white mt-[2px] break-all">{value}</span>
               </div>
             ))}
           </div>
@@ -56,12 +56,12 @@ function AboutMe() {
       </div>
 
       {/* What I Do section */}
-      <div className="px-[50px] pt-[28px] pb-[40px]">
+      <div className="px-4 md:px-[50px] pt-[28px] pb-[40px]">
         <div className="mb-[20px]">
           <span className="text-[18px] font-bold text-[#04b4e0]">{t("aboutMe.whatIDo")}</span>
         </div>
 
-        <div className="grid grid-cols-2 gap-[16px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
           {SKILL_KEYS.map((key, i) => {
             const points = t(`aboutMe.skills.${key}.points`, { returnObjects: true });
             return (

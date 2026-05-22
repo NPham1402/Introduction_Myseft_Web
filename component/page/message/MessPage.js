@@ -76,10 +76,10 @@ function MessPage() {
   };
 
   return (
-    <div className="page-enter w-full overflow-auto h-full min-h-[80vh] max-h-[80vh] bg-[#222] rounded-r-[30px] text-white flex flex-col">
+    <div className="page-enter w-full overflow-auto min-h-full bg-[#222] md:rounded-r-[30px] text-white flex flex-col">
 
       {/* Map */}
-      <div className="px-[40px] pt-[30px]">
+      <div className="px-4 md:px-[40px] pt-4 md:pt-[30px]">
         <div className="mb-[10px]">
           <span className="text-[32px] font-bold">{t("common.title.contact").toUpperCase()}</span>
         </div>
@@ -92,10 +92,10 @@ function MessPage() {
       </div>
 
       {/* Main content */}
-      <div className="flex flex-row gap-[20px] px-[40px] pb-[36px] flex-1">
+      <div className="flex flex-col md:flex-row gap-[16px] md:gap-[20px] px-4 md:px-[40px] pb-[36px] flex-1">
 
         {/* Left: info cards */}
-        <div className="w-[200px] shrink-0 flex flex-col gap-[10px]">
+        <div className="grid grid-cols-2 md:grid-cols-1 md:w-[200px] md:shrink-0 gap-[10px]">
           {INFO_CARDS.map(({ icon: Icon, label }) => (
             <div
               key={label}

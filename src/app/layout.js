@@ -191,24 +191,24 @@ export default function RootLayout({ children }) {
                   <Image width={52} height={52} alt="avatar" src={logo} loading="eager"
                     className="rounded-full border-[2px] border-[#fff] bg-[#fff]" />
                 </div>
-                <div className="flex-1">
-                  <h1 className="text-[16px] font-semibold text-[#f5f5f5] leading-tight">{t("common.name")}</h1>
-                  <p className="text-[12px] font-light text-[#bbb]">{t("common.title.webDeveloper")}</p>
+                <div className="flex-1 min-w-0">
+                  <h1 className="text-[14px] font-semibold text-[#f5f5f5] leading-tight truncate">{t("common.name")}</h1>
+                  <p className="text-[11px] font-light text-[#bbb] truncate">{t("common.title.webDeveloper")}</p>
                 </div>
-                <div className="flex items-center gap-3">
-                  <BiLogoGithub className="cursor-pointer hover:text-[#04b4e0] text-white" size={24} />
+                <div className="flex items-center gap-2 shrink-0">
+                  <BiLogoGithub className="cursor-pointer hover:text-[#04b4e0] text-white" size={20} />
                   {isDark
-                    ? <BsSun size={22} onClick={toggleTheme} className="cursor-pointer text-[#b5b6b7] hover:text-[#04b4e0]" />
-                    : <BsMoon size={22} onClick={toggleTheme} className="cursor-pointer text-[#b5b6b7] hover:text-[#04b4e0]" />}
-                  <Image width={24} height={24} alt="Viet Nam Flag" onClick={() => { setLanguageMenu(0); i18n.changeLanguage("vi"); }} src={vietnameFLag}
+                    ? <BsSun size={20} onClick={toggleTheme} className="cursor-pointer text-[#b5b6b7] hover:text-[#04b4e0]" />
+                    : <BsMoon size={20} onClick={toggleTheme} className="cursor-pointer text-[#b5b6b7] hover:text-[#04b4e0]" />}
+                  <Image width={22} height={22} alt="Viet Nam Flag" onClick={() => { setLanguageMenu(0); i18n.changeLanguage("vi"); }} src={vietnameFLag}
                     className={`rounded-full opacity-60 cursor-pointer ${langeuageMenu === 0 && "ring-1 ring-white"}`} />
-                  <Image width={24} height={24} alt="USA Flag" src={usaFLag} onClick={() => { setLanguageMenu(1); i18n.changeLanguage("en"); }}
+                  <Image width={22} height={22} alt="USA Flag" src={usaFLag} onClick={() => { setLanguageMenu(1); i18n.changeLanguage("en"); }}
                     className={`rounded-full cursor-pointer ${langeuageMenu === 1 && "ring-1 ring-white"}`} />
                 </div>
               </div>
 
               {/* Page content */}
-              <div className="flex-1 overflow-auto pb-[70px]">
+              <div className="flex-1 overflow-auto pb-[70px] bg-[#222]">
                 {children}
               </div>
 
