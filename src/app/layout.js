@@ -89,7 +89,7 @@ export default function RootLayout({ children }) {
         <meta property="og:url" content="https://dophamnguyen.xyz/" />
         <meta property="og:title" content="Đỗ Phạm Nguyên — Portfolio" />
         <meta property="og:description" content="Full-stack developer passionate about innovation, creativity, and technology." />
-        <meta property="og:image" content="https://dophamnguyen.xyz/og-image.png" />
+        <meta property="og:image" content="https://dophamnguyen.xyz/og?title=Đỗ Phạm Nguyên&subtitle=Full-stack Developer" />
         <meta property="og:locale" content="vi_VN" />
         <meta property="og:locale:alternate" content="en_US" />
 
@@ -98,7 +98,7 @@ export default function RootLayout({ children }) {
         <meta name="twitter:url" content="https://dophamnguyen.xyz/" />
         <meta name="twitter:title" content="Đỗ Phạm Nguyên — Portfolio" />
         <meta name="twitter:description" content="Full-stack developer passionate about innovation, creativity, and technology." />
-        <meta name="twitter:image" content="https://dophamnguyen.xyz/og-image.png" />
+        <meta name="twitter:image" content="https://dophamnguyen.xyz/og?title=Đỗ Phạm Nguyên&subtitle=Full-stack Developer" />
 
         <link rel="canonical" href="https://dophamnguyen.xyz/" />
 

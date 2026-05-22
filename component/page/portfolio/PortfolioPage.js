@@ -1,6 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import ScrollProgress from "../../ui/ScrollProgress";
 
 const LOGSIGNT_CONTENT = {
   en: {
@@ -177,9 +178,12 @@ function PortfolioPage() {
   const { t, i18n } = useTranslation();
   const active = PROJECT_KEYS[selected];
   const lang = i18n.language === "vi" ? "vi" : "en";
+  const detailRef = useRef(null);
 
   return (
-    <div className="page-enter w-full min-h-full overflow-auto bg-[#222] md:rounded-r-[30px] p-4 md:p-[60px] text-white flex flex-col">
+    <div className="page-enter w-full min-h-full bg-[#222] md:rounded-r-[30px] text-white flex flex-col">
+      <ScrollProgress containerRef={detailRef} />
+    <div className="flex flex-col flex-1 overflow-hidden p-4 md:p-[60px]">
       <div className="mb-[16px] md:mb-[20px]">
         <span className="text-[28px] md:text-[32px] font-semibold">PORT</span>
         <span className="text-[28px] md:text-[32px] text-[#04b4e0] font-semibold">FOLIO</span>
@@ -200,7 +204,7 @@ function PortfolioPage() {
         </div>
 
         {/* Detail panel */}
-        <div className="md:w-7/12 bg-[#2a2a2a] rounded-[16px] p-[16px] md:p-[24px] overflow-auto flex flex-col">
+        <div ref={detailRef} className="md:w-7/12 bg-[#2a2a2a] rounded-[16px] p-[16px] md:p-[24px] overflow-auto flex flex-col">
           <p className="text-[22px] font-bold text-[#f5f5f5] mb-[2px]">{active.title}</p>
           <div className="flex items-center gap-[10px] mb-[14px]">
             <p className="text-[13px] text-[#04b4e0] italic">
@@ -255,6 +259,7 @@ function PortfolioPage() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

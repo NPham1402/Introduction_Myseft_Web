@@ -1,6 +1,7 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
+import ScrollProgress from "../../ui/ScrollProgress";
 
 function SkillTag({ label }) {
   return (
@@ -31,9 +32,12 @@ function ExperienceBlock({ period, company, role, description }) {
 
 function ResumePage() {
   const { t } = useTranslation();
+  const scrollRef = useRef(null);
 
   return (
-    <div className="page-enter w-full min-h-full overflow-auto bg-[#222] md:rounded-r-[30px] p-4 md:p-[60px] text-white">
+    <div className="page-enter w-full min-h-full flex flex-col bg-[#222] md:rounded-r-[30px] text-white">
+      <ScrollProgress containerRef={scrollRef} />
+    <div ref={scrollRef} className="flex-1 overflow-auto p-4 md:p-[60px]">
       <span className="text-[28px] md:text-[32px] font-semibold">RESU</span>
       <span className="text-[28px] md:text-[32px] text-[#04b4e0] font-semibold">ME</span>
 
@@ -104,6 +108,7 @@ function ResumePage() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

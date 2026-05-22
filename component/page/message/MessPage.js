@@ -13,14 +13,15 @@ import { child, get, ref, set } from "firebase/database";
 import { database } from "../../config/firebase";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
+import CopyText from "../../ui/CopyText";
 
 const MapComponent = dynamic(() => import("./MapComponent"), { ssr: false });
 
 const INFO_CARDS = [
-  { icon: VscLocation, label: "Ho Chi Minh City" },
-  { icon: BsTelephone, label: "+84 938 224 718" },
-  { icon: AiOutlineMail, label: "npham140201@gmail.com" },
-  { icon: FiGithub,     label: "github.com/NPham1402" },
+  { icon: VscLocation,  label: "Ho Chi Minh City",       copy: false },
+  { icon: BsTelephone,  label: "+84 938 224 718",         copy: true  },
+  { icon: AiOutlineMail,label: "npham140201@gmail.com",   copy: true  },
+  { icon: FiGithub,     label: "github.com/NPham1402",    copy: true  },
 ];
 
 function MessPage() {
@@ -102,7 +103,9 @@ function MessPage() {
               className="bg-[#2a2a2a] rounded-[14px] px-[14px] py-[16px] flex flex-col items-center text-center gap-[8px] flex-1"
             >
               <Icon size={26} color="#04b4e0" />
-              <p className="text-[12px] text-[#ccc] leading-[1.5]">{label}</p>
+              {copy
+                ? <CopyText text={label} className="text-[12px] text-[#ccc] leading-[1.5]" />
+                : <p className="text-[12px] text-[#ccc] leading-[1.5]">{label}</p>}
             </div>
           ))}
         </div>

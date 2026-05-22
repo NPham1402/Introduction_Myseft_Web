@@ -6,6 +6,7 @@ import { GrServerCluster } from "react-icons/gr";
 import { IoIosCloud } from "react-icons/io";
 import { FaDatabase } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
+import CopyText from "../../ui/CopyText";
 
 const SKILL_ICONS = [
   <CgWebsite key="fe" color="#04b4e0" size={28} />,
@@ -22,8 +23,8 @@ function AboutMe() {
     { label: t("aboutMe.labels.age"),       value: dayjs().diff(dayjs("2001-02-14"), "year") },
     { label: t("aboutMe.labels.residence"), value: "Viet Nam" },
     { label: t("aboutMe.labels.city"),      value: "Ho Chi Minh" },
-    { label: t("aboutMe.labels.email"),     value: "npham140201@gmail.com" },
-    { label: t("aboutMe.labels.phone"),     value: "+84938 224 718" },
+    { label: t("aboutMe.labels.email"), value: "npham140201@gmail.com", copy: true },
+    { label: t("aboutMe.labels.phone"), value: "+84938 224 718",       copy: true },
   ];
 
   return (
@@ -48,7 +49,9 @@ function AboutMe() {
                 <span className="text-[11px] uppercase tracking-widest text-[#04b4e0] font-semibold">
                   {label}
                 </span>
-                <span className="text-[13px] text-white mt-[2px] break-all">{value}</span>
+                {copy
+                  ? <CopyText text={value} className="text-[13px] text-white mt-[2px] break-all" />
+                  : <span className="text-[13px] text-white mt-[2px] break-all">{value}</span>}
               </div>
             ))}
           </div>
