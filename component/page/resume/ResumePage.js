@@ -1,41 +1,110 @@
+"use client";
 import React from "react";
-import Jello from "react-reveal/Jello";
-function ResumePage(props) {
+import { useTranslation } from "react-i18next";
+
+function SkillTag({ label }) {
   return (
-    <Jello>
-      <div className="w-full  h-full mt-auto align-middle min-h-[80vh]   bg-[#222] rounded-r-[30px] p-[60px] text-white">
-        <span className="text-[32px]  font-semibold">RESUME</span>
-        <br />
+    <span className="inline-block bg-[#04b4e0]/20 text-[#04b4e0] border border-[#04b4e0]/40 text-[12px] px-[10px] py-[3px] rounded-full mr-[6px] mb-[6px]">
+      {label}
+    </span>
+  );
+}
 
-        <div className="w-full flex flex-row">
-          <div className="w-8/12 ">
-            <span className="text-[25px]  font-semibold">Education:</span>
-            <p>2019-2024</p>
-            <p className="text-[20px]">
-              Ho Chi Minh City University of Foreign Languages and Information
-              Technology (HUFLIT)
-            </p>
+function SectionTitle({ children }) {
+  return (
+    <span className="text-[22px] font-semibold text-[#f5f5f5] block mb-[6px]">
+      {children}
+    </span>
+  );
+}
 
-            <li>Major: Information Technology </li>
-            <li>GPA: 7,37/10</li>
-            <div className="mt-[40px]" />
-            <span className="text-[25px]   font-semibold">Experience:</span>
-            <p>5/2024 - 05/2025</p>
-            <p className="text-[20px]">
-              FPT School of Business and Technology (FSB)
-            </p>
-            <ul className="text-[13x]">
-              Developed web tools with Google Apps Script to streamline
-              administrative tasks and automate reporting. Contributed to API
-              integration for quarterly reports, managed institute facilities,
-              and provided on-site technical assistance during events to ensure
-              smooth operations.
-            </ul>
+function ExperienceBlock({ period, company, role, description }) {
+  return (
+    <div className="mb-[28px]">
+      <p className="text-[#04b4e0] text-[13px] font-medium">{period}</p>
+      <p className="text-[18px] font-semibold">{company}</p>
+      <p className="text-[13px] text-[#bbb] italic mb-[6px]">{role}</p>
+      <p className="text-[13px] text-[#ccc] leading-[1.6]">{description}</p>
+    </div>
+  );
+}
+
+function ResumePage() {
+  const { t } = useTranslation();
+
+  return (
+    <div className="page-enter w-full h-full mt-auto align-middle min-h-[80vh] max-h-[80vh] overflow-auto bg-[#222] rounded-r-[30px] p-[60px] text-white">
+        <span className="text-[32px] font-semibold">RESU</span>
+        <span className="text-[32px] text-[#04b4e0] font-semibold">ME</span>
+
+        <div className="w-full flex flex-row mt-[30px] gap-[40px]">
+          {/* Left column */}
+          <div className="w-7/12">
+            <SectionTitle>{t("resume.education")}</SectionTitle>
+            <div className="mb-[28px]">
+              <p className="text-[#04b4e0] text-[13px] font-medium">{t("resume.edu.period")}</p>
+              <p className="text-[18px] font-semibold">{t("resume.edu.university")}</p>
+              <p className="text-[13px] text-[#bbb] italic mb-[4px]">{t("resume.edu.major")}</p>
+              <p className="text-[13px] text-[#ccc]">{t("resume.edu.gpa")}</p>
+            </div>
+
+            <SectionTitle>{t("resume.experience")}</SectionTitle>
+
+            <ExperienceBlock
+              period={t("resume.exp.fsb.period")}
+              company={t("resume.exp.fsb.company")}
+              role={t("resume.exp.fsb.role")}
+              description={t("resume.exp.fsb.description")}
+            />
+
+            <ExperienceBlock
+              period={t("resume.exp.whammy.period")}
+              company={t("resume.exp.whammy.company")}
+              role={t("resume.exp.whammy.role")}
+              description={t("resume.exp.whammy.description")}
+            />
           </div>
-          <div className="w-4/12 "></div>
+
+          {/* Right column */}
+          <div className="w-5/12">
+            <SectionTitle>{t("resume.skills")}</SectionTitle>
+
+            <p className="text-[13px] text-[#04b4e0] font-semibold mb-[4px] uppercase tracking-wide">{t("resume.skillGroups.frontend")}</p>
+            <div className="mb-[14px]">
+              <SkillTag label="ReactJS" />
+              <SkillTag label="NextJS" />
+              <SkillTag label="RemixJS" />
+              <SkillTag label="TailwindCSS" />
+              <SkillTag label="HTML / CSS" />
+            </div>
+
+            <p className="text-[13px] text-[#04b4e0] font-semibold mb-[4px] uppercase tracking-wide">{t("resume.skillGroups.backend")}</p>
+            <div className="mb-[14px]">
+              <SkillTag label="ExpressJS" />
+              <SkillTag label="Hono" />
+              <SkillTag label="ASP.NET (C#)" />
+              <SkillTag label="Google Apps Script" />
+            </div>
+
+            <p className="text-[13px] text-[#04b4e0] font-semibold mb-[4px] uppercase tracking-wide">{t("resume.skillGroups.database")}</p>
+            <div className="mb-[14px]">
+              <SkillTag label="SQL / MySQL" />
+              <SkillTag label="MongoDB" />
+              <SkillTag label="Firebase" />
+              <SkillTag label="D1 SQLite" />
+            </div>
+
+            <p className="text-[13px] text-[#04b4e0] font-semibold mb-[4px] uppercase tracking-wide">{t("resume.skillGroups.devops")}</p>
+            <div className="mb-[14px]">
+              <SkillTag label="Cloudflare Workers" />
+              <SkillTag label="AWS S3" />
+              <SkillTag label="Docker" />
+              <SkillTag label="NGINX" />
+              <SkillTag label="Zalo Mini App" />
+            </div>
+          </div>
         </div>
       </div>
-    </Jello>
   );
 }
 

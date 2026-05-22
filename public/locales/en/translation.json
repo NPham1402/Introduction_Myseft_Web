@@ -13,7 +13,7 @@
       "vietnam": "Vietnamese",
       "usa": "English",
       "contact": "contact",
-      "sendMe": "Send mesage to me",
+      "sendMe": "Send message to me",
       "fullname": "FullName",
       "subject": "Subject",
       "sendmess": "Send message"
@@ -27,6 +27,96 @@
       "tooShort": "Too Short!",
       "required": "Required",
       "invalidEmail": "Invalid Email"
+    }
+  },
+  "aboutMe": {
+    "bio": "My personality is sociable, open-minded, and respectful, dedicated to work. My lifelong journey of overcoming a speech disorder condition demonstrates my exceptional resilience, effort and determination. I aim to keep moving forward to sharpen my knowledge and pursue my dreams of becoming an advanced developer.",
+    "labels": {
+      "age": "Age",
+      "residence": "Residence",
+      "city": "City",
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "whatIDo": "What I DO",
+    "skills": {
+      "frontend": {
+        "title": "Frontend Development",
+        "points": ["Responsive UI with Next.js, React.js & RemixJS", "Engaging animations to enhance user experience"]
+      },
+      "backend": {
+        "title": "Backend Development",
+        "points": ["REST APIs for frontend-backend communication", "Third-party integrations (auth, payment, delivery)"]
+      },
+      "cloud": {
+        "title": "Cloud & Performance",
+        "points": ["Cloudflare Workers reverse proxy & load balancing", "System stability and scalability optimization"]
+      },
+      "database": {
+        "title": "Database & Optimization",
+        "points": ["DB design, query optimization, performance tuning", "Caching strategies & monitoring for stable systems"]
+      }
+    }
+  },
+  "resume": {
+    "education": "Education",
+    "experience": "Experience",
+    "skills": "Skills",
+    "edu": {
+      "period": "2019 – 2024",
+      "university": "Ho Chi Minh City University of Foreign Languages and Information Technology (HUFLIT)",
+      "major": "Major: Information Technology",
+      "gpa": "GPA: 7.37 / 10"
+    },
+    "exp": {
+      "fsb": {
+        "period": "Mar 2024 – May 2025",
+        "company": "FPT School of Business and Technology (FSB)",
+        "role": "IT Service Support",
+        "description": "Developed web applications and tools with Google Apps Script to automate administrative tasks and quarterly reporting. Built a school website and class management app (ReactJS, TailwindCSS), an asset management system (Google Sheets + Forms), and a library management app with barcode scanning. Provided on-site technical assistance during events and supported users on LMS platforms."
+      },
+      "whammy": {
+        "period": "Apr 2022 – Nov 2022",
+        "company": "Whammy Tech",
+        "role": "Fullstack Web Application Developer Intern",
+        "description": "Developed the company website using RemixJS, TailwindCSS, and AWS S3 — storing candidate CVs in S3 with Slack Webhook notifications. Built a Metaverse event calendar with NextJS and automated data sync from API. Integrated multiple UK delivery service APIs into a logistics application."
+      }
+    },
+    "skillGroups": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "database": "Database",
+      "devops": "DevOps & Others"
+    }
+  },
+  "portfolio": {
+    "techStack": "Tech Stack",
+    "visit": "Visit",
+    "projects": {
+      "logsignt": {
+        "subtitle": "SaaS Log Monitoring Platform",
+        "description": "Production-grade SaaS for real-time application log ingestion, monitoring, and alerting. Multi-tenant architecture with JWT/OAuth SSO, TOTP 2FA, role-based access, SSE log streaming, geo-traffic visualization, and multi-channel alerts (Telegram, Discord, Slack, Email). Fully deployed on Cloudflare edge."
+      },
+      "fsb": {
+        "subtitle": "FPT School of Business and Technology",
+        "description": "School website with class schedule, academic transcripts, and quarterly report display. Asset management system tracking location, quantity, and borrower data via Google Sheets + Forms. Library management app with barcode scanning for automated book check-in/check-out."
+      },
+      "whammy": {
+        "subtitle": "Fullstack — Whammy Tech",
+        "description": "Company profile website showcasing services, recruitment, and achievements. Candidate CVs stored in AWS S3 with Slack Webhook notifications on submission. Includes animated UI built with RemixJS and Framer Motion."
+      },
+      "crypto": {
+        "subtitle": "Chrome Extension",
+        "description": "Chrome extension giving traders quick crypto price checks and market news. ReactJS UI with ExpressJS backend deployed across multiple instances, load-balanced and cached via Cloudflare Workers reverse proxy."
+      },
+      "art": {
+        "subtitle": "Film Acting & Visual Arts",
+        "description": "Film Acting (1st Grade): A unique childhood milestone. Early exposure to film sets, cameras, and lighting not only built my confidence in front of an audience but also nurtured a lifelong passion for visual arts and framing that continues to this day."
+      },
+      "callspam": {
+        "subtitle": "Cross-Platform Mobile App",
+        "description": "Phone number identification and spam-call blocking app. Elasticsearch powers high-speed data retrieval; NGINX handles distributed query processing. React Native UI with cross-platform support and deep customization. Fully containerised with Docker."
+      }
     }
   }
 }

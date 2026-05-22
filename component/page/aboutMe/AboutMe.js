@@ -1,111 +1,91 @@
+"use client";
 import dayjs from "dayjs";
 import React from "react";
-import Slide from "react-reveal/Slide";
 import { CgWebsite } from "react-icons/cg";
 import { GrServerCluster } from "react-icons/gr";
 import { IoIosCloud } from "react-icons/io";
 import { FaDatabase } from "react-icons/fa";
-function AboutMe(props) {
-  const InforLine = ({ header, infor }) => {
-    return (
-      <p className={"text-[#04b4e0] mb-[10px] font-bold text-[15px] "}>
-        {header}&nbsp; &nbsp;
-        <span className="text-white">{infor}</span>
-      </p>
-    );
-  };
-  return (
-    <Slide left>
-      <div className="w-full overflow-auto  h-full mt-auto align-middle min-h-[80vh] max-h-[80vh]   bg-[#222] rounded-r-[30px] p-[60px] text-white">
-        <span className="text-[32px] font-semibold">ABOUT</span>
-        <span className="text-[32px] text-[#04b4e0] font-semibold"> ME</span>
-        <div className="flex flex-row mt-[20px]">
-          <div className="w-7/12 mr-[10px] text-[15px] leading-[1.65rem] font-normal">
-            My personality is sociable, open-minded, and respectful, dedicated
-            to work. My lifelong journey of overcoming a speech disorder
-            condition demonstrates my exceptional resilience, effort and
-            determination. While working, I definitely want to channel this
-            drive into my work. My aim is to keep moving forward to sharpen my
-            knowledge, skillset and have the opportunity to pursue my dreams of
-            becoming an advance developer in the near future.
-          </div>
-          <div className="w-5/12">
-            <InforLine
-              header={"Age"}
-              infor={dayjs().diff(dayjs("2001-02-14"), "year")}
-            />
+import { useTranslation } from "react-i18next";
 
-            <InforLine header={"Residence"} infor={"Viet Nam"} />
-            <InforLine header={"City"} infor={"Ho Chi Minh"} />
-            <InforLine header={"Email"} infor={"npham140201@gmail.com"} />
-            <InforLine header={"Phone"} infor={"+84938 224 718"} />
-          </div>
+const SKILL_ICONS = [
+  <CgWebsite key="fe" color="#04b4e0" size={28} />,
+  <GrServerCluster key="be" color="#04b4e0" size={28} />,
+  <IoIosCloud key="cloud" color="#04b4e0" size={28} />,
+  <FaDatabase key="db" color="#04b4e0" size={28} />,
+];
+const SKILL_KEYS = ["frontend", "backend", "cloud", "database"];
+
+function AboutMe() {
+  const { t } = useTranslation();
+
+  const INFO = [
+    { label: t("aboutMe.labels.age"),       value: dayjs().diff(dayjs("2001-02-14"), "year") },
+    { label: t("aboutMe.labels.residence"), value: "Viet Nam" },
+    { label: t("aboutMe.labels.city"),      value: "Ho Chi Minh" },
+    { label: t("aboutMe.labels.email"),     value: "npham140201@gmail.com" },
+    { label: t("aboutMe.labels.phone"),     value: "+84938 224 718" },
+  ];
+
+  return (
+    <div className="page-enter w-full overflow-auto h-full min-h-[80vh] max-h-[80vh] bg-[#222] rounded-r-[30px] text-white flex flex-col">
+      {/* Top bio section */}
+      <div className="px-[50px] pt-[44px] pb-[32px] border-b border-white/10">
+        <div className="mb-[20px]">
+          <span className="text-[30px] font-bold">ABOUT</span>
+          <span className="text-[30px] font-bold text-[#04b4e0]"> ME</span>
         </div>
-        <div className="mt-[50px]">
-          <span className="text-[21px] font-semibold">What </span>
-          <span className="text-[21px] text-[#04b4e0] font-semibold">I DO</span>
-        </div>
-        <div className="mt-[20px] mr-[10px]  leading-[1.65rem] font-normal">
-          <div className="flex flex-row">
-            <div className=" w-1/2 mr-[10px]  ">
-              <CgWebsite color="#04b4e0" className="mb-1" size={50} />
-              <div className="uppercase  font-bold">Frontend Development</div>
-              <ul className="list-disc">
-                <li>
-                  Build responsive, user-friendly interfaces with frameworks
-                  such as Next.js and React.js.
-                </li>
-                <li>
-                  Create engaging UI with animations to enhance user experience.
-                </li>
-              </ul>
-            </div>
-            <div className=" w-1/2 mr-[10px]  ">
-              <GrServerCluster color="#04b4e0" className="mb-1" size={50} />
-              <div className="uppercase  font-bold">Backend Development</div>
-              <ul className="list-disc">
-                <li>
-                  Develop and maintain APIs for frontend-backend communication.
-                </li>
-                <li>
-                  Integrate multiple third-party services (e.g., delivery
-                  services, authentication, payment).
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="flex flex-row mt-[10px]">
-            <div className=" w-1/2 mr-[10px]  ">
-              <IoIosCloud color="#04b4e0" className="mb-1" size={50} />
-              <div className="uppercase  font-bold">Cloud & Performance</div>
-              <ul className="list-disc">
-                <li>
-                  Handle multiple instances using reverse proxy powered by
-                  Cloudflare Workers for load balancing and caching.
-                </li>
-                <li>Optimize system stability and scalability.</li>
-              </ul>
-            </div>
-            <div className=" w-1/2 mr-[10px]  ">
-              <FaDatabase color="#04b4e0" className="mb-1" size={50} />
-              <div className="uppercase  font-bold">
-                Database & System Optimization
+
+        <div className="flex flex-row gap-[32px]">
+          {/* Bio text */}
+          <p className="w-6/12 text-[13.5px] leading-[1.8] text-[#ccc]">
+            {t("aboutMe.bio")}
+          </p>
+
+          {/* Info grid */}
+          <div className="w-6/12 grid grid-cols-2 gap-x-[16px] gap-y-[10px] self-start">
+            {INFO.map(({ label, value }) => (
+              <div key={label} className="flex flex-col">
+                <span className="text-[11px] uppercase tracking-widest text-[#04b4e0] font-semibold">
+                  {label}
+                </span>
+                <span className="text-[13px] text-white mt-[2px]">{value}</span>
               </div>
-              <ul className="list-disc">
-                <li>
-                  work on database design, query optimization, and system
-                  performance tuning to ensure applications run efficiently.
-                </li>
-                <li>
-                  mplement caching strategies and monitoring tools to keep
-                  systems stable and scalable.
-                </li>
-              </ul>
-            </div>
+            ))}
           </div>
         </div>
       </div>
-    </Slide>
+
+      {/* What I Do section */}
+      <div className="px-[50px] pt-[28px] pb-[40px]">
+        <div className="mb-[20px]">
+          <span className="text-[18px] font-bold text-[#04b4e0]">{t("aboutMe.whatIDo")}</span>
+        </div>
+
+        <div className="grid grid-cols-2 gap-[16px]">
+          {SKILL_KEYS.map((key, i) => {
+            const points = t(`aboutMe.skills.${key}.points`, { returnObjects: true });
+            return (
+              <div
+                key={key}
+                className="bg-[#2a2a2a] rounded-[14px] p-[18px] flex flex-col gap-[8px]"
+              >
+                <div className="flex items-center gap-[10px]">
+                  {SKILL_ICONS[i]}
+                  <span className="text-[12px] font-bold uppercase tracking-wide text-[#f5f5f5]">
+                    {t(`aboutMe.skills.${key}.title`)}
+                  </span>
+                </div>
+                <ul className="list-disc pl-[18px] text-[12px] text-[#aaa] leading-[1.7] space-y-[2px]">
+                  {Array.isArray(points) && points.map((p) => (
+                    <li key={p}>{p}</li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
   );
 }
 

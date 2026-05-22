@@ -15,7 +15,8 @@
       "contact": "Liên lạc",
       "sendMe": "Gửi tôi lời nhắn của bạn",
       "fullname": "Họ Tên",
-      "subject": "Chủ đề"
+      "subject": "Chủ đề",
+      "sendmess": "Gửi lời nhắn"
     },
     "button": {
       "search": "Tìm kiếm",
@@ -27,6 +28,95 @@
       "required": "Không để trống",
       "invalidEmail": "Email không hợp lệ"
     }
+  },
+  "aboutMe": {
+    "bio": "Tính cách của tôi cởi mở, thân thiện và tôn trọng mọi người, luôn tận tâm với công việc. Hành trình vượt qua rối loạn ngôn ngữ suốt cuộc đời đã chứng minh sức bền, nỗ lực và quyết tâm phi thường của tôi. Tôi luôn hướng về phía trước để trau dồi kiến thức và theo đuổi ước mơ trở thành một lập trình viên cao cấp.",
+    "labels": {
+      "age": "Tuổi",
+      "residence": "Quốc Tịch",
+      "city": "Thành Phố",
+      "email": "Email",
+      "phone": "Điện Thoại"
+    },
+    "whatIDo": "Tôi Làm Gì",
+    "skills": {
+      "frontend": {
+        "title": "Phát Triển Frontend",
+        "points": ["Giao diện responsive với Next.js, React.js & RemixJS", "Animation sinh động nâng cao trải nghiệm người dùng"]
+      },
+      "backend": {
+        "title": "Phát Triển Backend",
+        "points": ["REST API kết nối frontend và backend", "Tích hợp bên thứ ba (xác thực, thanh toán, giao hàng)"]
+      },
+      "cloud": {
+        "title": "Cloud & Hiệu Suất",
+        "points": ["Reverse proxy & load balancing với Cloudflare Workers", "Tối ưu hoá tính ổn định và khả năng mở rộng của hệ thống"]
+      },
+      "database": {
+        "title": "Database & Tối Ưu Hoá",
+        "points": ["Thiết kế DB, tối ưu truy vấn, tinh chỉnh hiệu suất", "Chiến lược caching & giám sát để hệ thống ổn định"]
+      }
+    }
+  },
+  "resume": {
+    "education": "Học Vấn",
+    "experience": "Kinh Nghiệm",
+    "skills": "Kỹ Năng",
+    "edu": {
+      "period": "2019 – 2024",
+      "university": "Đại học Ngoại ngữ - Tin học TP.HCM (HUFLIT)",
+      "major": "Chuyên ngành: Công nghệ Thông tin",
+      "gpa": "GPA: 7.37 / 10"
+    },
+    "exp": {
+      "fsb": {
+        "period": "Tháng 3/2024 – Tháng 5/2025",
+        "company": "Trường FPT Kinh doanh và Công nghệ (FSB)",
+        "role": "Hỗ Trợ Dịch Vụ IT",
+        "description": "Phát triển ứng dụng web và công cụ với Google Apps Script để tự động hoá các tác vụ hành chính và báo cáo học kỳ. Xây dựng website trường và ứng dụng quản lý lớp học (ReactJS, TailwindCSS), hệ thống quản lý tài sản (Google Sheets + Forms) và ứng dụng quản lý thư viện với quét mã vạch. Hỗ trợ kỹ thuật trực tiếp tại các sự kiện và hỗ trợ người dùng trên nền tảng LMS."
+      },
+      "whammy": {
+        "period": "Tháng 4/2022 – Tháng 11/2022",
+        "company": "Whammy Tech",
+        "role": "Thực Tập Sinh Phát Triển Web Fullstack",
+        "description": "Phát triển website công ty bằng RemixJS, TailwindCSS và AWS S3 — lưu trữ CV ứng viên trên S3 với thông báo qua Slack Webhook. Xây dựng lịch sự kiện Metaverse với NextJS và tự động đồng bộ dữ liệu từ API. Tích hợp nhiều API dịch vụ giao hàng tại Anh vào ứng dụng logistics."
+      }
+    },
+    "skillGroups": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "database": "Cơ Sở Dữ Liệu",
+      "devops": "DevOps & Khác"
+    }
+  },
+  "portfolio": {
+    "techStack": "Công Nghệ",
+    "visit": "Xem",
+    "projects": {
+      "logsignt": {
+        "subtitle": "Nền tảng SaaS Giám sát Log",
+        "description": "Nền tảng SaaS cấp production cho việc thu thập, giám sát và cảnh báo log ứng dụng theo thời gian thực. Kiến trúc đa thuê (multi-tenant) với JWT/OAuth SSO, TOTP 2FA, phân quyền theo vai trò, stream log qua SSE, trực quan hoá lưu lượng địa lý và cảnh báo đa kênh (Telegram, Discord, Slack, Email). Triển khai hoàn toàn trên mạng edge của Cloudflare."
+      },
+      "fsb": {
+        "subtitle": "Trường FPT Kinh Doanh và Công Nghệ",
+        "description": "Website trường hiển thị lịch học, bảng điểm và báo cáo học kỳ. Hệ thống quản lý tài sản theo dõi vị trí, số lượng và người mượn qua Google Sheets + Forms. Ứng dụng quản lý thư viện với quét mã vạch để tự động check-in/check-out sách."
+      },
+      "whammy": {
+        "subtitle": "Fullstack — Whammy Tech",
+        "description": "Website giới thiệu công ty với dịch vụ, tuyển dụng và thành tích. CV ứng viên được lưu trên AWS S3 với thông báo qua Slack Webhook. Giao diện có animation được xây dựng bằng RemixJS và Framer Motion."
+      },
+      "crypto": {
+        "subtitle": "Tiện ích mở rộng Chrome",
+        "description": "Tiện ích Chrome giúp trader kiểm tra giá crypto nhanh và theo dõi tin tức thị trường. Giao diện ReactJS với backend ExpressJS triển khai trên nhiều instance, cân bằng tải và cache qua Cloudflare Workers."
+      },
+      "art": {
+        "subtitle": "Diễn xuất & Nghệ thuật Thị giác",
+        "description": "Diễn xuất điện ảnh (Lớp 1): Một cột mốc tuổi thơ đặc biệt. Tiếp xúc sớm với trường quay, camera và ánh sáng không chỉ xây dựng sự tự tin trước khán giả mà còn nuôi dưỡng niềm đam mê nghệ thuật thị giác kéo dài đến tận ngày nay."
+      },
+      "callspam": {
+        "subtitle": "Ứng dụng Di động Đa nền tảng",
+        "description": "Ứng dụng nhận diện và chặn cuộc gọi rác. Elasticsearch hỗ trợ truy xuất dữ liệu tốc độ cao; NGINX xử lý truy vấn phân tán. Giao diện React Native đa nền tảng với khả năng tuỳ chỉnh sâu. Toàn bộ được container hoá bằng Docker."
+      }
+    }
   }
 }
- 
