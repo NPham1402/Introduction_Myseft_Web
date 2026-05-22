@@ -1,3 +1,4 @@
+export const runtime = "edge";
 import HomePage from "../../component/page/home/HomePage";
 
 export default function Home() {

@@ -46,8 +46,17 @@ function MessPage() {
       .required(t("common.errCode.required")),
   });
 
-  const handleSubmit = (values, { resetForm }) => {
+  const handleSubmit = async (values, { resetForm }) => {
     if (!token) return;
+
+    const verifyRes = await fetch("/api/verify-turnstile", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token }),
+    });
+
+    if (!verifyRes.ok) return;
+
     const dbref = ref(database);
     get(child(dbref, "Message"))
       .then((snapshot) => {

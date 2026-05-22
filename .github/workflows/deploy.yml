@@ -18,18 +18,15 @@ jobs:
         with:
           node-version: 20
 
-      - name: Enable Corepack (Yarn)
-        run: corepack enable
-
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm install --legacy-peer-deps
 
-      - name: Build
-        run: yarn build
+      - name: Build with next-on-pages
+        run: npx @cloudflare/next-on-pages
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy out --project-name=introduction-myself-web
+          command: pages deploy .vercel/output/static --project-name=introduction-myself-web
