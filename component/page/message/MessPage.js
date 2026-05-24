@@ -5,7 +5,6 @@ import { VscLocation } from "react-icons/vsc";
 import { BsTelephone } from "react-icons/bs";
 import { AiOutlineMail } from "react-icons/ai";
 import { FiGithub } from "react-icons/fi";
-import { Turnstile } from "@marsidev/react-turnstile";
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
 import { Tooltip as ReactTooltip } from "react-tooltip";
@@ -25,7 +24,6 @@ const INFO_CARDS = [
 ];
 
 function MessPage() {
-  const [token, setToken] = React.useState(null);
   const [sent, setSent] = React.useState(false);
   const { t } = useTranslation();
 
@@ -48,16 +46,6 @@ function MessPage() {
   });
 
   const handleSubmit = async (values, { resetForm }) => {
-    if (!token) return;
-
-    const verifyRes = await fetch("/api/verify-turnstile", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token }),
-    });
-
-    if (!verifyRes.ok) return;
-
     const dbref = ref(database);
     get(child(dbref, "Message"))
       .then((snapshot) => {
@@ -173,17 +161,9 @@ function MessPage() {
                     <ReactTooltip isOpen={!!errors.message} anchorId="msg-message" place="top" variant="error" content={errors.message} />
                   </div>
 
-                  <Turnstile
-                    siteKey="0x4AAAAAADUZ3LY80BzlNpEY"
-                    onSuccess={setToken}
-                    onExpire={() => setToken(null)}
-                    options={{ theme: "dark" }}
-                  />
-
                   <button
                     type="submit"
-                    disabled={!token}
-                    className="w-fit rounded-[30px] py-[10px] px-[32px] text-[14px] font-medium border-[2px] border-[#04b4e0] hover:bg-[#04b4e0]/20 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="w-fit rounded-[30px] py-[10px] px-[32px] text-[14px] font-medium border-[2px] border-[#04b4e0] hover:bg-[#04b4e0]/20 transition-colors"
                   >
                     {t("common.button.sendmess")}
                   </button>
