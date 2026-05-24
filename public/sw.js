@@ -1,5 +1,5 @@
-const CACHE = 'dpn-portfolio-v1';
-const PRECACHE = ['/', '/about', '/resume', '/portfolio', '/contact', '/manifest.json'];
+const CACHE = 'dpn-portfolio-v3';
+const PRECACHE = ['/', '/manifest.json'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
@@ -16,6 +16,28 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
+  const url = e.request.url;
+
+  /* skip non-http requests (chrome-extension://, etc.) */
+  if (!url.startsWith('http')) return;
+
+  /* network-first for JS/CSS chunks — always get latest after deploy */
+  if (url.includes('/_next/static/')) {
+    e.respondWith(
+      fetch(e.request)
+        .then((res) => {
+          if (res.ok) {
+            const cloned = res.clone();
+            caches.open(CACHE).then((c) => c.put(e.request, cloned));
+          }
+          return res;
+        })
+        .catch(() => caches.match(e.request))
+    );
+    return;
+  }
+
+  /* cache-first for everything else (fonts, images, manifest) */
   if (e.request.method !== 'GET') return;
   e.respondWith(
     caches.match(e.request).then((cached) => {
