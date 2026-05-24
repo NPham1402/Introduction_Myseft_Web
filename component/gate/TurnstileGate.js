@@ -8,6 +8,7 @@ const SESSION_KEY = "cf_verified";
 export default function TurnstileGate({ children }) {
   const [verified, setVerified]   = useState(false);
   const [checking, setChecking]   = useState(true);
+  const [fading, setFading]       = useState(false);
 
   useEffect(() => {
     if (sessionStorage.getItem(SESSION_KEY) === "1") setVerified(true);
@@ -23,17 +24,18 @@ export default function TurnstileGate({ children }) {
       });
     } catch { /* ignore */ }
     sessionStorage.setItem(SESSION_KEY, "1");
-    setVerified(true);
+
+    /* play loading effect before revealing content */
+    setFading(true);
+    setTimeout(() => setVerified(true), 1400);
   };
 
   const showGate = !checking && !verified;
 
   return (
     <>
-      {/* Children always render — Googlebot reads this HTML */}
       {children}
 
-      {/* Overlay blocks humans until verified, invisible to crawlers */}
       {showGate && (
         <div
           style={{
@@ -47,23 +49,48 @@ export default function TurnstileGate({ children }) {
             justifyContent: "center",
             gap: "28px",
             fontFamily: "sans-serif",
+            transition: "opacity 0.8s ease",
+            opacity: fading ? 0 : 1,
+            pointerEvents: fading ? "none" : "auto",
           }}
         >
-          <style>{`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');`}</style>
+          <style>{`
+            @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
 
+            @keyframes gate-spin {
+              to { transform: rotate(360deg); }
+            }
+            @keyframes gate-pulse {
+              0%, 100% { opacity: 1; transform: scale(1); }
+              50%       { opacity: 0.4; transform: scale(0.88); }
+            }
+            .gate-spinner {
+              width: 44px; height: 44px;
+              border: 3px solid rgba(4,180,224,0.2);
+              border-top-color: #04b4e0;
+              border-radius: 50%;
+              animation: gate-spin 0.9s linear infinite;
+            }
+            .gate-dots span {
+              display: inline-block;
+              width: 8px; height: 8px;
+              margin: 0 4px;
+              border-radius: 50%;
+              background: #04b4e0;
+              animation: gate-pulse 1.2s ease-in-out infinite;
+            }
+            .gate-dots span:nth-child(2) { animation-delay: 0.2s; }
+            .gate-dots span:nth-child(3) { animation-delay: 0.4s; }
+          `}</style>
+
+          {/* Brand */}
           <div style={{ textAlign: "center" }}>
-            <div
-              style={{
-                fontSize: "48px",
-                fontWeight: 700,
-                color: "#f5f5f5",
-                fontFamily: "'Playfair Display', serif",
-                letterSpacing: "0.5px",
-                lineHeight: 1.2,
-              }}
-            >
-              Đỗ Phạm{" "}
-              <span style={{ color: "#04b4e0" }}>Nguyên</span>
+            <div style={{
+              fontSize: "48px", fontWeight: 700, color: "#f5f5f5",
+              fontFamily: "'Playfair Display', serif",
+              letterSpacing: "0.5px", lineHeight: 1.2,
+            }}>
+              Đỗ Phạm <span style={{ color: "#04b4e0" }}>Nguyên</span>
             </div>
             <div style={{ fontSize: "15px", color: "#888", marginTop: "6px" }}>
               Full-stack Developer · Portfolio
@@ -72,19 +99,33 @@ export default function TurnstileGate({ children }) {
 
           <div style={{ width: "48px", height: "3px", background: "#04b4e0", borderRadius: "2px" }} />
 
-          <p style={{ color: "#aaa", fontSize: "14px", margin: 0 }}>
-            Please verify you are human to continue
-          </p>
-
-          <Turnstile
-            siteKey={SITE_KEY}
-            onSuccess={handleSuccess}
-            options={{ theme: "dark", size: "normal" }}
-          />
-
-          <p style={{ color: "rgba(255,255,255,0.2)", fontSize: "12px", margin: 0 }}>
-            Protected by Cloudflare Turnstile
-          </p>
+          {fading ? (
+            /* Loading state after verification */
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "20px" }}>
+              <div className="gate-spinner" />
+              <div className="gate-dots">
+                <span /><span /><span />
+              </div>
+              <p style={{ color: "#04b4e0", fontSize: "14px", margin: 0, letterSpacing: "0.5px" }}>
+                Entering portfolio…
+              </p>
+            </div>
+          ) : (
+            /* Challenge state */
+            <>
+              <p style={{ color: "#aaa", fontSize: "14px", margin: 0 }}>
+                Please verify you are human to continue
+              </p>
+              <Turnstile
+                siteKey={SITE_KEY}
+                onSuccess={handleSuccess}
+                options={{ theme: "dark", size: "normal" }}
+              />
+              <p style={{ color: "rgba(255,255,255,0.2)", fontSize: "12px", margin: 0 }}>
+                Protected by Cloudflare Turnstile
+              </p>
+            </>
+          )}
         </div>
       )}
     </>
