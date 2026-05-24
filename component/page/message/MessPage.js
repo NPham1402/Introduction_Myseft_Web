@@ -97,7 +97,7 @@ function MessPage() {
 
         {/* Left: info cards */}
         <div className="grid grid-cols-2 md:grid-cols-1 md:w-[200px] md:shrink-0 gap-[10px]">
-          {INFO_CARDS.map(({ icon: Icon, label }) => (
+          {INFO_CARDS.map(({ icon: Icon, label, copy }) => (
             <div
               key={label}
               className="bg-[#2a2a2a] rounded-[14px] px-[14px] py-[16px] flex flex-col items-center text-center gap-[8px] flex-1"

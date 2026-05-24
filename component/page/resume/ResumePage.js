@@ -35,7 +35,7 @@ function ResumePage() {
   const scrollRef = useRef(null);
 
   return (
-    <div className="page-enter w-full min-h-full flex flex-col bg-[#222] md:rounded-r-[30px] text-white">
+    <div className="page-enter w-full h-full flex flex-col bg-[#222] md:rounded-r-[30px] text-white">
       <ScrollProgress containerRef={scrollRef} />
     <div ref={scrollRef} className="flex-1 overflow-auto p-4 md:p-[60px]">
       <span className="text-[28px] md:text-[32px] font-semibold">RESU</span>

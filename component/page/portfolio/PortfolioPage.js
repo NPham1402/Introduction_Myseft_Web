@@ -181,17 +181,17 @@ function PortfolioPage() {
   const detailRef = useRef(null);
 
   return (
-    <div className="page-enter w-full min-h-full bg-[#222] md:rounded-r-[30px] text-white flex flex-col">
+    <div ref={detailRef} className="page-enter w-full h-full overflow-auto bg-[#222] md:rounded-r-[30px] text-white flex flex-col">
       <ScrollProgress containerRef={detailRef} />
-    <div className="flex flex-col flex-1 overflow-hidden p-4 md:p-[60px]">
+    <div className="flex flex-col p-4 md:p-[60px]">
       <div className="mb-[16px] md:mb-[20px]">
         <span className="text-[28px] md:text-[32px] font-semibold">PORT</span>
         <span className="text-[28px] md:text-[32px] text-[#04b4e0] font-semibold">FOLIO</span>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-[16px] md:gap-[24px] flex-1">
+      <div className="flex flex-col md:flex-row gap-[16px] md:gap-[24px]">
         {/* Project list — horizontal scroll on mobile */}
-        <div className="md:w-5/12 flex flex-row md:flex-col gap-[10px] overflow-x-auto md:overflow-y-auto md:overflow-x-hidden pb-1 md:pb-0 shrink-0">
+        <div className="md:w-5/12 flex flex-col gap-[10px] shrink-0">
           {PROJECT_KEYS.map((p, i) => (
             <ProjectCard
               key={p.key}
@@ -204,7 +204,7 @@ function PortfolioPage() {
         </div>
 
         {/* Detail panel */}
-        <div ref={detailRef} className="md:w-7/12 bg-[#2a2a2a] rounded-[16px] p-[16px] md:p-[24px] overflow-auto flex flex-col">
+        <div className="md:w-7/12 bg-[#2a2a2a] rounded-[16px] p-[16px] md:p-[24px] flex flex-col">
           <p className="text-[22px] font-bold text-[#f5f5f5] mb-[2px]">{active.title}</p>
           <div className="flex items-center gap-[10px] mb-[14px]">
             <p className="text-[13px] text-[#04b4e0] italic">

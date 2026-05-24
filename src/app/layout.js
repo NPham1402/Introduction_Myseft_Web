@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, Suspense, lazy } from "react";
 import "./globals.css";
 import { useTranslation } from "react-i18next";
 import { Inter } from "next/font/google";
@@ -22,9 +22,7 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import Loading from "./Loading";
 import { delay } from "../../component/function/delay";
 import { useRouter, usePathname } from "next/navigation";
-import dynamic from "next/dynamic";
-
-const Background3D = dynamic(() => import("../../component/background/Background3D"), { ssr: false });
+const Background3D = lazy(() => import("../../component/background/Background3D"));
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,6 +39,7 @@ export default function RootLayout({ children }) {
   const [langeuageMenu, setLanguageMenu] = useState(1);
   const [loading, setLoading] = useState(true);
   const [isDark, setIsDark] = useState(true);
+  const [isFlipped, setIsFlipped] = useState(false);
   const { t, i18n } = useTranslation();
   const router = useRouter();
   const pathname = usePathname();
@@ -116,37 +115,80 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className={inter.className}>
-        <Background3D />
+        <Suspense fallback={null}><Background3D /></Suspense>
         <main className="flex min-h-screen overflow-hidden" style={{ position: "relative", zIndex: 1 }}>
           <Suspense fallback={<Loading />}>
 
             {/* ── DESKTOP layout ── */}
             <div className="hidden md:flex w-[70%] h-[70%] flex-row m-auto">
-              {/* Card container */}
-              <div className={`w-[90%] h-[90%] max-h-[80vh] overflow-hidden bg-[#444444] flex flex-row max-w-[1280px] rounded-[32px] z-50 ${loading ? "animate-pulse" : ""} m-auto`}>
-                {/* LEFT sidebar */}
-                <div className="w-full h-full text-center pt-[72px] relative min-h-[80vh] max-w-[380px]">
-                  <div className="anim-rotate w-[180px] relative mx-auto mb-[30px]">
+
+              {/* ── FRONT ── */}
+              {!isFlipped && (
+                <div className={`flip-in w-[90%] overflow-hidden bg-[#444444] flex flex-row max-w-[1280px] rounded-[32px] z-50 ${loading ? "animate-pulse" : ""} m-auto`} style={{ height: "80vh" }}>
+                  {/* LEFT sidebar */}
+                  <div className="w-full h-full text-center pt-[72px] relative min-h-[80vh] max-w-[380px]">
+                    <div className="anim-rotate w-[180px] relative mx-auto mb-[30px]">
+                      <div className="photoBacb"></div>
+                      <Image width={180} height={180} alt="avatar" src={logo} loading="eager"
+                        className="rounded-full border-[3px] mt-3 border-[#fff] bg-[#fff]" />
+                    </div>
+                    <div className="anim-slideup">
+                      <h1 className="text-[36px] font-semibold text-[#f5f5f5]">{t("common.name")}</h1>
+                      <p className="text-[18px] font-light text-[#bbb] mb-[32px]">{t("common.title.webDeveloper")}</p>
+                      <div className="flex justify-center flex-row">
+                        <BiLogoGithub className="cursor-pointer mr-[6px] hover:bg-white/20 hover:rounded-full" color="white" size={30} />
+                      </div>
+                      <a href="/src/app/cv/cv.pdf" download>
+                        <div className="w-[146px] h-[46px] cursor-pointer mx-auto mt-[54px] rounded-[30px] text-white border-[2px] border-[#f5f5f5]">
+                          <p className="mt-[8px]">{t("common.title.downloadCV")}</p>
+                        </div>
+                      </a>
+                      <button
+                        onClick={() => setIsFlipped(true)}
+                        className="mt-[14px] text-[12px] text-[#04b4e0] hover:underline cursor-pointer"
+                      >
+                        ↩ flip card
+                      </button>
+                    </div>
+                    <div className="text-[#bbb] text-[12px] text-center absolute bottom-[8px] w-full">© 2020 Do Pham Nguyen.</div>
+                  </div>
+                  {children}
+                </div>
+              )}
+
+              {/* ── BACK ── */}
+              {isFlipped && (
+                <div className="flip-in w-[90%] min-h-[80vh] max-h-[80vh] bg-[#444444] flex flex-col items-center justify-center max-w-[1280px] rounded-[32px] z-50 m-auto text-white gap-[20px]">
+                  <div className="anim-rotate w-[140px] relative mx-auto">
                     <div className="photoBacb"></div>
-                    <Image width={180} height={180} alt="avatar" src={logo} loading="eager"
+                    <Image width={140} height={140} alt="avatar" src={logo} loading="eager"
                       className="rounded-full border-[3px] mt-3 border-[#fff] bg-[#fff]" />
                   </div>
-                  <div className="anim-slideup">
-                    <h1 className="text-[36px] font-semibold text-[#f5f5f5]">{t("common.name")}</h1>
-                    <p className="text-[18px] font-light text-[#bbb] mb-[32px]">{t("common.title.webDeveloper")}</p>
-                    <div className="flex justify-center flex-row">
-                      <BiLogoGithub className="cursor-pointer mr-[6px] hover:bg-white/20 hover:rounded-full" color="white" size={30} />
-                    </div>
-                    <a href="/src/app/cv/cv.pdf" download>
-                      <div className="w-[146px] h-[46px] cursor-pointer mx-auto mt-[72px] rounded-[30px] text-white border-[2px] border-[#f5f5f5]">
-                        <p className="mt-[8px]">{t("common.title.downloadCV")}</p>
-                      </div>
-                    </a>
+                  <div className="text-center">
+                    <h2 className="text-[32px] font-bold text-[#f5f5f5]">{t("common.name")}</h2>
+                    <p className="text-[16px] text-[#04b4e0] mb-[24px]">{t("common.title.webDeveloper")}</p>
                   </div>
-                  <div className="text-[#bbb] text-[12px] text-center absolute bottom-[8px] w-full">© 2020 Do Pham Nguyen.</div>
+                  <div className="grid grid-cols-2 gap-x-[48px] gap-y-[20px] text-center">
+                    {[
+                      { label: "Email",    value: "npham140201@gmail.com" },
+                      { label: "Phone",    value: "+84 938 224 718" },
+                      { label: "Location", value: "Ho Chi Minh City" },
+                      { label: "GitHub",   value: "github.com/NPham1402" },
+                    ].map(({ label, value }) => (
+                      <div key={label}>
+                        <p className="text-[11px] uppercase tracking-widest text-[#04b4e0] font-semibold">{label}</p>
+                        <p className="text-[13px] text-[#ccc] mt-[2px]">{value}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <button
+                    onClick={() => setIsFlipped(false)}
+                    className="mt-[8px] text-[13px] border border-[#04b4e0] text-[#04b4e0] px-[24px] py-[8px] rounded-full hover:bg-[#04b4e0]/20 transition-colors cursor-pointer"
+                  >
+                    ↩ flip back
+                  </button>
                 </div>
-                {children}
-              </div>
+              )}
 
               {/* Desktop side nav */}
               <nav aria-label="Main navigation" className="flex flex-col justify-between">
@@ -182,7 +224,6 @@ export default function RootLayout({ children }) {
                       : <BsMoon size={26} onClick={toggleTheme} aria-label="Switch to dark mode" role="button" className="mx-auto cursor-pointer text-[#b5b6b7] hover:text-[#04b4e0]" />}
                   </li>
                 </ul>
-
                 <ul role="list" className={`w-[70px] h-[130px] bg-[#444444] ${loading ? "animate-pulse " : ""} rounded-[35px] z-[100] pt-[15px]`}>
                   <li className="anim-zoom-1 pt-[15px]">
                     <MdArrowForwardIos aria-label="Next page" role="button" className="mx-auto cursor-pointer text-[#b5b6b7] hover:text-[#04b4e0]" onClick={() => navigate(positionMenu + 1)} size={30} />

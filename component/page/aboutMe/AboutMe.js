@@ -28,7 +28,7 @@ function AboutMe() {
   ];
 
   return (
-    <div className="page-enter w-full overflow-auto h-full min-h-full bg-[#222] md:rounded-r-[30px] text-white flex flex-col">
+    <div className="page-enter w-full overflow-auto h-full bg-[#222] md:rounded-r-[30px] text-white flex flex-col">
       {/* Top bio section */}
       <div className="px-4 md:px-[50px] pt-5 md:pt-[44px] pb-[32px] border-b border-white/10">
         <div className="mb-[20px]">
@@ -44,7 +44,7 @@ function AboutMe() {
 
           {/* Info grid */}
           <div className="md:w-6/12 grid grid-cols-2 gap-x-[16px] gap-y-[10px] self-start">
-            {INFO.map(({ label, value }) => (
+            {INFO.map(({ label, value, copy }) => (
               <div key={label} className="flex flex-col">
                 <span className="text-[11px] uppercase tracking-widest text-[#04b4e0] font-semibold">
                   {label}
@@ -70,17 +70,21 @@ function AboutMe() {
             return (
               <div
                 key={key}
-                className="bg-[#2a2a2a] rounded-[14px] p-[18px] flex flex-col gap-[8px]"
+                className="bg-[#2a2a2a] rounded-[14px] p-[18px] flex flex-col gap-[8px] border border-white/[0.06] hover:border-[#04b4e0]/25 transition-colors duration-200"
               >
                 <div className="flex items-center gap-[10px]">
                   {SKILL_ICONS[i]}
-                  <span className="text-[12px] font-bold uppercase tracking-wide text-[#f5f5f5]">
+                  <span className="text-[12px] font-bold uppercase tracking-widest text-[#f5f5f5]">
                     {t(`aboutMe.skills.${key}.title`)}
                   </span>
                 </div>
-                <ul className="list-disc pl-[18px] text-[12px] text-[#aaa] leading-[1.7] space-y-[2px]">
+                <div className="h-px bg-white/[0.07]" />
+                <ul className="space-y-[5px]">
                   {Array.isArray(points) && points.map((p) => (
-                    <li key={p}>{p}</li>
+                    <li key={p} className="flex items-start gap-[6px] text-[12px] text-[#aaa] leading-[1.65]">
+                      <span className="text-[#04b4e0] shrink-0 mt-[1px] font-bold">›</span>
+                      <span>{p}</span>
+                    </li>
                   ))}
                 </ul>
               </div>
