@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, Suspense, lazy } from "react";
+import { useEffect, useState, Suspense } from "react";
 import "./globals.css";
 import { useTranslation } from "react-i18next";
 import { Inter } from "next/font/google";
@@ -22,7 +22,10 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import Loading from "./Loading";
 import { delay } from "../../component/function/delay";
 import { useRouter, usePathname } from "next/navigation";
-const Background3D = lazy(() => import("../../component/background/Background3D"));
+import dynamic from "next/dynamic";
+
+const Background3D   = dynamic(() => import("../../component/background/Background3D"),   { ssr: false });
+const TurnstileGate  = dynamic(() => import("../../component/gate/TurnstileGate"),         { ssr: false });
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -115,7 +118,8 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className={inter.className}>
-        <Suspense fallback={null}><Background3D /></Suspense>
+        <Background3D />
+        <TurnstileGate>
         <main className="flex min-h-screen overflow-hidden" style={{ position: "relative", zIndex: 1 }}>
           <Suspense fallback={<Loading />}>
 
@@ -286,6 +290,7 @@ export default function RootLayout({ children }) {
           <ReactTooltip anchorId="messagepage" place="right" variant="info" content={t("common.title.message").toUpperCase()} />
           <ReactTooltip anchorId="aboutmepage" place="right" variant="info" content={t("common.title.aboutMe").toUpperCase()} />
         </main>
+        </TurnstileGate>
       </body>
     </html>
   );
